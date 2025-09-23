@@ -1,4 +1,5 @@
 import type { DeliveryChargeRule } from "./DeliveryChargeRule.js";
+import type { Offer } from "./Offer.js";
 import type { ProductCatalogue } from "./ProductCatalogue.js";
 
 export class Basket {
@@ -7,7 +8,7 @@ export class Basket {
   constructor(
     readonly productCatalogue: ProductCatalogue,
     readonly deliveryChargeRules: DeliveryChargeRule,
-    readonly offers: any[]
+    readonly offers: Offer[]
   ) {
     this.productQuantities = new Map();
   }
@@ -22,7 +23,10 @@ export class Basket {
     this.productQuantities.forEach((quantity, productCode) => {
       const product = this.productCatalogue.get(productCode);
       if (product) {
-        basketTotal += product.price * quantity;
+        const discounts = this.offers
+          .map((offer) => offer.getDiscount(product, quantity))
+          .reduce((a, b) => a + b, 0);
+        basketTotal += product.price * quantity - discounts;
       }
     });
     return (
