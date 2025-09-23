@@ -1,27 +1,30 @@
 import type { Product } from "./Product.js";
 
 export abstract class Offer {
-  abstract getDiscount(product: Product, quantity: number): number;
+  abstract getDiscounts(
+    items: { product: Product; quantity: number }[]
+  ): number;
 }
 
 export class HalfOffEverySecondProductOffer implements Offer {
-  hasSeenOddProductCode: boolean = false;
   constructor(readonly productCode: string) {}
 
-  getDiscount(product: Product, quantity: number): number {
-    if (product.code !== this.productCode) {
-      return 0;
-    }
-
-    let discount = 0;
-    for (let i = 0; i < quantity; i++) {
-      if (this.hasSeenOddProductCode) {
-        discount += product.price / 2;
-        this.hasSeenOddProductCode = false;
-      } else {
-        this.hasSeenOddProductCode = true;
-      }
-    }
-    return discount;
+  getDiscounts(items: { product: Product; quantity: number }[]): number {
+    let hasSeenOddProductCodes = false;
+    return items
+      .filter((item) => item.product.code === this.productCode)
+      .map((item) => {
+        let discount = 0;
+        for (let i = 0; i < item.quantity; i++) {
+          if (hasSeenOddProductCodes) {
+            discount += item.product.price / 2;
+            hasSeenOddProductCodes = false;
+          } else {
+            hasSeenOddProductCodes = true;
+          }
+        }
+        return discount;
+      })
+      .reduce((a, b) => a + b, 0);
   }
 }

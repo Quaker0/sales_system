@@ -1,5 +1,6 @@
 import type { DeliveryChargeRule } from "./DeliveryChargeRule.js";
 import type { Offer } from "./Offer.js";
+import type { Product } from "./Product.js";
 import type { ProductCatalogue } from "./ProductCatalogue.js";
 
 export class Basket {
@@ -19,20 +20,28 @@ export class Basket {
   }
 
   total(): number {
-    let basketTotal = 0;
+    const basketItems: { product: Product; quantity: number }[] = [];
     this.productQuantities.forEach((quantity, productCode) => {
       const product = this.productCatalogue.get(productCode);
       if (product) {
-        const discounts = this.offers
-          .map((offer) => offer.getDiscount(product, quantity))
-          .reduce((a, b) => a + b, 0);
-        basketTotal += product.price * quantity - discounts;
+        basketItems.push({ product, quantity });
       }
     });
-    return (
-      Math.floor(
-        100 * (basketTotal + this.deliveryChargeRules.calculate(basketTotal))
-      ) / 100
+
+    const discounts = this.offers
+      .map((offer) => offer.getDiscounts(basketItems))
+      .reduce((acc, curr) => acc + curr, 0);
+
+    const basketTotalWithDiscounts =
+      basketItems.reduce(
+        (acc, curr) => acc + curr.product.price * curr.quantity,
+        0
+      ) - discounts;
+
+    const deliveryFee = this.deliveryChargeRules.calculate(
+      basketTotalWithDiscounts
     );
+    const total = basketTotalWithDiscounts + deliveryFee;
+    return Math.floor(100 * total) / 100;
   }
 }
