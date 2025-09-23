@@ -1,0 +1,20 @@
+{
+  "name": "sales_system",
+  "version": "1.0.0",
+  "description": "",
+  "license": "ISC",
+  "author": "Niclas Bångman",
+  "type": "module",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "devDependencies": {
+    "@types/node": "^24.5.2",
+    "tsx": "^4.20.5",
+    "typescript": "^5.9.2"
+  },
+  "engine": {
+    "node": ">=22"
+  }
+}
