@@ -3,7 +3,7 @@ import assert from "node:assert";
 import { Basket } from "../src/Basket.js";
 import { ProductCatalogue } from "../src/ProductCatalogue.js";
 import { DeliveryChargeDiscountRule } from "../src/DeliveryChargeRule.js";
-import { HalfOffEverySecondProductOffer } from "../src/Offer.js";
+import { HalfOffEveryXProductOffer } from "../src/Offer.js";
 
 let basket: Basket;
 describe("Test Basket Logic", async () => {
@@ -15,7 +15,7 @@ describe("Test Basket Logic", async () => {
     ];
     const productCatalogue = new ProductCatalogue(products);
     const deliveryChargeRule = new DeliveryChargeDiscountRule();
-    const offers = [new HalfOffEverySecondProductOffer("R01")];
+    const offers = [new HalfOffEveryXProductOffer("R01", 2)];
     basket = new Basket(productCatalogue, deliveryChargeRule, offers);
   });
 

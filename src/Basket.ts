@@ -7,9 +7,9 @@ export class Basket {
   productQuantities: Map<string, number>;
 
   constructor(
-    readonly productCatalogue: ProductCatalogue,
-    readonly deliveryChargeRules: DeliveryChargeRule,
-    readonly offers: Offer[]
+    private productCatalogue: ProductCatalogue,
+    private deliveryChargeRules: DeliveryChargeRule,
+    private offers: Offer[]
   ) {
     this.productQuantities = new Map();
   }

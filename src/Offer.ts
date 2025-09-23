@@ -6,21 +6,23 @@ export abstract class Offer {
   ): number;
 }
 
-export class HalfOffEverySecondProductOffer implements Offer {
-  constructor(readonly productCode: string) {}
+export class HalfOffEveryXProductOffer implements Offer {
+  constructor(private productCode: string, private everyX: number) {
+    if (this.everyX < 1) {
+      throw new Error("everyX must be at least 1");
+    }
+  }
 
   getDiscounts(items: { product: Product; quantity: number }[]): number {
-    let hasSeenOddProductCodes = false;
+    let productCount = 0;
     return items
       .filter((item) => item.product.code === this.productCode)
       .map((item) => {
         let discount = 0;
         for (let i = 0; i < item.quantity; i++) {
-          if (hasSeenOddProductCodes) {
+          productCount += 1;
+          if (productCount % this.everyX === 0) {
             discount += item.product.price / 2;
-            hasSeenOddProductCodes = false;
-          } else {
-            hasSeenOddProductCodes = true;
           }
         }
         return discount;
