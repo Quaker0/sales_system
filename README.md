@@ -35,6 +35,6 @@ The injected models are defined in this structure:
 - offers
 - product-catalogues
 
-That means that you can easily implement and plug-in any additional feature you might want or need in the future. You just have to implement the interface of the type DeliveryChargeRule/Offer/ProductCatalogue. Thus supporting new delivery prices, offers and most important of all a product catalogue in a production database.
+That means that you can easily implement and plug in any additional feature you might want or need in the future. You just have to implement the interface of the type DeliveryChargeRule/Offer/ProductCatalogue. Enabling you to support new delivery prices, offers and a product catalogue stored in a production database instead of in-memory.
 
 `productQuantities` is still stored in-memory within the Basket class because that is how I interpreted the assignment. Preferably this one would also be stored in a state manager (Redis) or database and have a defined interface.
