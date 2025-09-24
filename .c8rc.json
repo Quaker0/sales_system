@@ -1,0 +1,14 @@
+{
+  "reporter": ["text", "html", "json"],
+  "reports-dir": "coverage",
+  "exclude": [
+    "tests/**",
+    "coverage/**",
+    "node_modules/**",
+    "**/*.test.ts",
+    "**/*.spec.ts"
+  ],
+  "include": ["src/**/*.ts"],
+  "all": true,
+  "src": "src"
+}

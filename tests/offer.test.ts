@@ -50,5 +50,9 @@ describe("Test Offers", () => {
       const items = [{ product: redProduct, quantity: 3 }];
       assert.strictEqual(offer.getDiscounts(items), 10);
     });
+
+    test("Invalid everyX raises", () => {
+      assert.throws(() => new HalfOffEveryXProductOffer("R01", 0));
+    });
   });
 });
