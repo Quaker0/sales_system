@@ -4,6 +4,11 @@ export interface Product {
   price: number;
 }
 
+export interface BasketModel {
+  add(productCode: string, quantity: number): void;
+  total(): number;
+}
+
 export interface BasketItem {
   product: Product;
   quantity: number;

@@ -1,7 +1,12 @@
-import type { Offer, DeliveryChargeRule, BasketItem } from "./types.js";
+import type {
+  Offer,
+  DeliveryChargeRule,
+  BasketItem,
+  BasketModel,
+} from "./types.js";
 import type { ProductCatalogue } from "./types.js";
 
-export class Basket {
+export class Basket implements BasketModel {
   productQuantities: Map<string, number>;
 
   constructor(
@@ -18,6 +23,17 @@ export class Basket {
   }
 
   total(): number {
+    const basketItems = this.getBasketItems();
+    const subtotal = this.calculateSubtotal(basketItems);
+    const discounts = this.calculateDiscounts(basketItems);
+    const subtotalAfterDiscounts = subtotal - discounts;
+    const deliveryFee = this.deliveryChargeRules.calculateDeliveryFee(
+      subtotalAfterDiscounts
+    );
+    return this.roundToTwoDecimals(subtotalAfterDiscounts + deliveryFee);
+  }
+
+  private getBasketItems(): BasketItem[] {
     const basketItems: BasketItem[] = [];
     this.productQuantities.forEach((quantity, productCode) => {
       const product = this.productCatalogue.get(productCode);
@@ -25,21 +41,24 @@ export class Basket {
         basketItems.push({ product, quantity });
       }
     });
+    return basketItems;
+  }
 
-    const discounts = this.offers
-      .map((offer) => offer.getDiscounts(basketItems))
-      .reduce((acc, curr) => acc + curr, 0);
-
-    const basketTotalWithDiscounts =
-      basketItems.reduce(
-        (acc, curr) => acc + curr.product.price * curr.quantity,
-        0
-      ) - discounts;
-
-    const deliveryFee = this.deliveryChargeRules.calculateDeliveryFee(
-      basketTotalWithDiscounts
+  private calculateSubtotal(items: BasketItem[]): number {
+    return items.reduce(
+      (total, item) => total + item.product.price * item.quantity,
+      0
     );
-    const total = basketTotalWithDiscounts + deliveryFee;
-    return Math.floor(100 * total) / 100;
+  }
+
+  private calculateDiscounts(items: BasketItem[]): number {
+    return this.offers.reduce(
+      (total, offer) => total + offer.getDiscounts(items),
+      0
+    );
+  }
+
+  private roundToTwoDecimals(amount: number): number {
+    return Math.floor(100 * amount) / 100;
   }
 }
