@@ -1,7 +1,5 @@
-import type { DeliveryChargeRule } from "./DeliveryChargeRule.js";
-import type { Offer } from "./Offer.js";
-import type { Product } from "./Product.js";
-import type { ProductCatalogue } from "./ProductCatalogue.js";
+import type { Offer, DeliveryChargeRule, BasketItem } from "./types.js";
+import type { ProductCatalogue } from "./types.js";
 
 export class Basket {
   productQuantities: Map<string, number>;
@@ -20,7 +18,7 @@ export class Basket {
   }
 
   total(): number {
-    const basketItems: { product: Product; quantity: number }[] = [];
+    const basketItems: BasketItem[] = [];
     this.productQuantities.forEach((quantity, productCode) => {
       const product = this.productCatalogue.get(productCode);
       if (product) {
@@ -38,7 +36,7 @@ export class Basket {
         0
       ) - discounts;
 
-    const deliveryFee = this.deliveryChargeRules.calculate(
+    const deliveryFee = this.deliveryChargeRules.calculateDeliveryFee(
       basketTotalWithDiscounts
     );
     const total = basketTotalWithDiscounts + deliveryFee;

@@ -1,10 +1,4 @@
-import type { Product } from "./Product.js";
-
-export abstract class Offer {
-  abstract getDiscounts(
-    items: { product: Product; quantity: number }[]
-  ): number;
-}
+import type { BasketItem, Offer } from "./types.js";
 
 export class HalfOffEveryXProductOffer implements Offer {
   constructor(private productCode: string, private everyX: number) {
@@ -13,7 +7,7 @@ export class HalfOffEveryXProductOffer implements Offer {
     }
   }
 
-  getDiscounts(items: { product: Product; quantity: number }[]): number {
+  getDiscounts(items: BasketItem[]): number {
     let productCount = 0;
     return items
       .filter((item) => item.product.code === this.productCode)

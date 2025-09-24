@@ -1,7 +1,7 @@
 import test, { beforeEach, describe } from "node:test";
 import assert from "node:assert";
 import { Basket } from "../src/Basket.js";
-import { ProductCatalogue } from "../src/ProductCatalogue.js";
+import { InMemoryProductCatalogue } from "../src/ProductCatalogue.js";
 import { DeliveryChargeTieredRule } from "../src/DeliveryChargeRule.js";
 import { HalfOffEveryXProductOffer } from "../src/Offer.js";
 
@@ -13,7 +13,7 @@ describe("Test Basket Logic", async () => {
       { code: "G01", name: "Green Widget", price: 24.95 },
       { code: "B01", name: "Blue Widget", price: 7.95 },
     ];
-    const productCatalogue = new ProductCatalogue(products);
+    const productCatalogue = new InMemoryProductCatalogue(products);
     const deliveryChargeRule = new DeliveryChargeTieredRule([
       { maxValue: 50, cost: 4.95 },
       { maxValue: 90, cost: 2.95 },

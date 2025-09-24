@@ -1,6 +1,6 @@
-import type { Product } from "./Product.js";
+import type { Product, ProductCatalogue } from "./types.js";
 
-export class ProductCatalogue {
+export class InMemoryProductCatalogue implements ProductCatalogue {
   productCatalogue: Map<string, Product>;
 
   constructor(products: Product[]) {

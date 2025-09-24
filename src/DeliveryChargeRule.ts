@@ -1,11 +1,9 @@
-export abstract class DeliveryChargeRule {
-  abstract calculate(basketTotal: number): number;
-}
+import type { DeliveryChargeRule } from "./types.js";
 
 export class DeliveryChargeTieredRule implements DeliveryChargeRule {
   constructor(private tiers: { maxValue: number; cost: number }[]) {}
 
-  calculate(basketTotal: number): number {
+  calculateDeliveryFee(basketTotal: number): number {
     if (basketTotal === 0) {
       return 0;
     }
