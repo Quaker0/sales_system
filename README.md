@@ -25,9 +25,16 @@ A aimed for a minimal setup with TS/Node and the builtin node test runner.
 - I made the DeliveryChargeTieredRule and HalfOffEveryXProductOffer more general than they perhaps needed to be which I usually would only do if I saw a need for it, but it shows the capabilites of it well. (The getDiscounts in HalfOffEveryXProductOffer could also be written as a formula instead.)
 - I tried to keep good separation in the project, it could perhaps be argued that the basket does too much as in maintains the basket and contains the pricing logic.
 
+### Code Quality
+
+- Optimised for readability
+- Separated into smaller functions and classes only doing one thing
+- 100% test coverage
+- Strong typing
+
 ### Extensibility
 
-The Basket class uses dependency injection to accept different models that it can use, allowing it to use in-memory implementations for unit tests and live databases for production.
+The Basket class uses dependency injection to accept different models that it can use, allowing it to use in-memory implementations for unit tests and live databases for production. Not having any hard-coded dependencies or singletons also makes the project very extensible.
 
 The injected models are defined in this structure:
 
