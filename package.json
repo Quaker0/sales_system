@@ -12,7 +12,7 @@
     "url": "https://github.com/Quaker0/sales_system.git"
   },
   "scripts": {
-    "test": "c8 node --import tsx --test tests/*.test.ts"
+    "test": "c8 node --import tsx --test"
   },
   "devDependencies": {
     "@types/node": "^24.5.2",
