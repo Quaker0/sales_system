@@ -2,6 +2,8 @@
 
 ## Commands
 
+**NOTE**: Use Node 22 (since the Node 20's test runner doesn't work very well)
+
 ### Setup
 
 ```sh
