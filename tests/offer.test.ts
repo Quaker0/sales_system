@@ -4,7 +4,7 @@ import { HalfOffEveryXProductOffer } from "../src/offers/half-off-every-x-produc
 import type { Product } from "../src/types.js";
 
 describe("Test Offers", () => {
-  describe("HalfOffEverySecondProductOffer", () => {
+  describe("Test HalfOffEverySecondProductOffer", () => {
     let offer: HalfOffEveryXProductOffer;
     let redProduct: Product;
     let greenProduct: Product;

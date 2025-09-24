@@ -6,7 +6,7 @@ import { DeliveryChargeTieredRule } from "../src/delivery-charge-rules/deliver-c
 import { HalfOffEveryXProductOffer } from "../src/offers/half-off-every-x-product-offer.js";
 
 let basket: Basket;
-describe("Test Basket Logic", async () => {
+describe("Test Basket", () => {
   beforeEach(() => {
     const products = [
       { code: "R01", name: "Red Widget", price: 32.95 },
