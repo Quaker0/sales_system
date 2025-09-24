@@ -1,11 +1,16 @@
 {
   "name": "sales_system",
   "version": "1.0.0",
-  "description": "",
+  "description": "Sales System - A Fictional PoS in TS",
   "license": "ISC",
   "author": "Niclas Bångman",
   "type": "module",
   "main": "index.js",
+  "private": true,
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Quaker0/sales_system.git"
+  },
   "scripts": {
     "test": "c8 node --import tsx --test tests/*.test.ts"
   },
