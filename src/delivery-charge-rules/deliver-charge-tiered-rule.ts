@@ -1,4 +1,4 @@
-import type { DeliveryChargeRule } from "./types.js";
+import type { DeliveryChargeRule } from "../types.js";
 
 export class DeliveryChargeTieredRule implements DeliveryChargeRule {
   constructor(private tiers: { maxValue: number; cost: number }[]) {}

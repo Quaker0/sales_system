@@ -1,4 +1,4 @@
-import type { BasketItem, Offer } from "./types.js";
+import type { BasketItem, Offer } from "../types.js";
 
 export class HalfOffEveryXProductOffer implements Offer {
   constructor(private productCode: string, private everyX: number) {

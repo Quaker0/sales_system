@@ -1,6 +1,6 @@
 import test, { beforeEach, describe } from "node:test";
 import assert from "node:assert";
-import { HalfOffEveryXProductOffer } from "../src/Offer.js";
+import { HalfOffEveryXProductOffer } from "../src/offers/half-off-every-x-product-offer.js";
 import type { Product } from "../src/types.js";
 
 describe("Test Offers", () => {

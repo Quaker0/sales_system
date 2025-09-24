@@ -1,6 +1,6 @@
 import test, { beforeEach, describe } from "node:test";
 import assert from "node:assert";
-import { InMemoryProductCatalogue } from "../src/ProductCatalogue.js";
+import { InMemoryProductCatalogue } from "../src/product-catalogues/in-memory-product-catalogue.js";
 import type { Product, ProductCatalogue } from "../src/types.js";
 
 describe("Test ProductCatalogue", () => {
