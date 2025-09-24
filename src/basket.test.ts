@@ -1,9 +1,9 @@
 import test, { beforeEach, describe } from "node:test";
 import assert from "node:assert";
-import { Basket } from "../src/basket.js";
-import { InMemoryProductCatalogue } from "../src/product-catalogues/in-memory-product-catalogue.js";
-import { DeliveryChargeTieredRule } from "../src/delivery-charge-rules/deliver-charge-tiered-rule.js";
-import { HalfOffEveryXProductOffer } from "../src/offers/half-off-every-x-product-offer.js";
+import { Basket } from "./basket.js";
+import { InMemoryProductCatalogue } from "./product-catalogues/in-memory-product-catalogue.js";
+import { DeliveryChargeTieredRule } from "./delivery-charge-rules/deliver-charge-tiered-rule.js";
+import { HalfOffEveryXProductOffer } from "./offers/half-off-every-x-product-offer.js";
 
 let basket: Basket;
 describe("Test Basket", () => {
